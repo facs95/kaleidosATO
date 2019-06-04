@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import QRCode from "qrcode.react";
 // import useRegistrationForm from "./CustomHooks";
 // import { addIpfsForm, getNewAddress } from "../apiURL";
 // import axios from "axios";
 
-function Wallet() {
+const Wallet = props => {
+  const [address, setAddress] = useState("");
+  useEffect(() => {
+    setAddress(props.match.params.wallet);
+    console.log(typeof address);
+  });
   return (
     <div>
-      <QRCode value="someStringtoUSe" size="150" />
+      <QRCode value={address} size="200" />
+
+      <p>Eth Address: {address}</p>
     </div>
   );
-}
+};
 
 export default Wallet;

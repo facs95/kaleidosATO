@@ -1,9 +1,12 @@
 import React from "react";
 
 import useRegistrationForm from "./CustomHooks";
+import { withRouter } from "react-router-dom";
 
-function AttendeeRegister() {
-  const { inputs, handleInputChange, handleSubmit } = useRegistrationForm();
+const AttendeeRegister = props => {
+  const { inputs, handleInputChange, handleSubmit } = useRegistrationForm(
+    props
+  );
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -47,6 +50,6 @@ function AttendeeRegister() {
       <button type="submit">Purchase</button>
     </form>
   );
-}
+};
 
-export default AttendeeRegister;
+export default withRouter(AttendeeRegister);
