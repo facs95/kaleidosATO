@@ -71,17 +71,17 @@ router.post("/newAttendee", async ctx => {
   };
 });
 
-router.post("/validateAttendee", async ctx => {
-  const { address } = ctx.request.body;
-  // get hash IPFS from ERC27 id
-  // burn erc27
-  // get erc20 balance
-  const attendeeInfo = ipfs.get(hash);
-  ctx.body = {
-    hash,
-    address
-  };
-});
+// router.post("/validateAttendee", async ctx => {
+//   const { address } = ctx.request.body;
+//   // get hash IPFS from ERC27 id
+//   // burn erc27
+//   // get erc20 balance
+//   const attendeeInfo = ipfs.get(hash);
+//   ctx.body = {
+//     hash,
+//     address
+//   };
+// });
 
 router.post("/contract/:contractAddress/mint", async ctx => {});
 

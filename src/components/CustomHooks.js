@@ -18,7 +18,7 @@ const useRegistrationForm = props => {
     };
     try {
       const newAttendeeInfo = await axios.post(newAttendee, body);
-      props.history.push(`/user/${newAttendeeInfo.data.hash}`);
+      props.history.push(`/user/${newAttendeeInfo.data.address}`);
     } catch (err) {
       console.log(err);
     }
