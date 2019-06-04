@@ -1,12 +1,13 @@
 "use strict";
-const koa = require("koa");
-const koaRouter = require("koa-router");
+const Koa = require("koa");
+const KoaRouter = require("koa-router");
 const bodyParser = require("koa-bodyparser");
 const json = require("koa-json");
 const cors = require("@koa/cors");
+const ipfs = require("./ipfs");
 
-const app = new koa();
-const router = new koaRouter();
+const app = new Koa();
+const router = new KoaRouter();
 
 app.use(async (ctx, next) => {
   try {
@@ -30,29 +31,30 @@ router.get("/", async ctx => {
   ctx.body = "Welcome to ATO Conference API";
 });
 
-// REQUIRE IPFS MODULES
-const ipfs = require("./ipfs");
-
+// -----------IPFS ENPOINTS-------------
 router.get("/get/:path", async ctx => {
   const { path } = ctx.params;
-  console.log(path);
-  const response = await ipfs.get(path);
-  console.log(response);
+  const data = await ipfs.get(path);
   ctx.body = {
-    data: response
+    data
   };
 });
 
-//to get operator and minimum amount required
 router.post("/add", async ctx => {
   const { content } = ctx.request.body;
-  const response = await ipfs.send(content);
+  const hash = await ipfs.send(content);
   ctx.body = {
-    hash: response
+    hash
   };
 });
 
-//minimum value needed for transaction
+// ----------------------------------------
+
+router.post("/contract/:contractAddress/mint", async ctx => {});
+
+router.post("/contract/:contractAddress/burn", async ctx => {});
+
+router.post("/contract/:contractAddress/transfer", async ctx => {});
 
 app.use(router.routes()).use(router.allowedMethods());
 
