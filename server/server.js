@@ -27,25 +27,29 @@ app.use(bodyParser());
 app.use(cors());
 
 router.get("/", async ctx => {
-  ctx.body = "Welcome to Fonbnk Services API";
+  ctx.body = "Welcome to ATO Conference API";
 });
 
+// REQUIRE IPFS MODULES
+const ipfs = require("./ipfs");
+
 router.get("/get/:path", async ctx => {
-  const { to, amount, currency } = ctx.params;
+  const { path } = ctx.params;
+  console.log(path);
+  const response = await ipfs.get(path);
+  console.log(response);
+  ctx.body = {
+    data: response
+  };
 });
 
 //to get operator and minimum amount required
 router.post("/add", async ctx => {
-  const { content } = ctx.body;
-  try {
-    const data = JSON.stringify(content);
-    const contentToSend = ipfsClient.Buffer.from(data);
-    const results = await ipfs.add(contentToSend);
-    console.log(results);
-  } catch (err) {
-    console.log(err);
-  }
-  console.log();
+  const { content } = ctx.request.body;
+  const response = await ipfs.send(content);
+  ctx.body = {
+    hash: response
+  };
 });
 
 //minimum value needed for transaction

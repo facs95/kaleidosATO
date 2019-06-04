@@ -4,12 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_PATH=./ node server.js",
+    "start.i": "NODE_PATH=./ nodemon --inspect server.js | bunyan -o short",
+    "start.manual": "NODE_PATH=./ node server.js | bunyan -o short",
+    "test": "NODE_PATH=./ jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@koa/cors": "^3.0.0",
+    "bunyan": "^1.8.12",
     "ipfs-http-client": "^32.0.1",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
