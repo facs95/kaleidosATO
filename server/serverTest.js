@@ -13,9 +13,23 @@ let nodeUrl = "https://" + USER + ":" + PASS + "@" + RPC_ENDPOINT;
 let provider = new Web3.providers.HttpProvider(nodeUrl);
 let web3 = new Web3(provider);
 
-web3.eth.getBlock("latest").then(latestBlock => {
-  console.log("Latest Block Via HTTP Provider: ");
-  console.log(latestBlock);
-  // Stop the program once this has finished
-  process.exit();
-});
+// web3.eth.getBlock("latest").then(latestBlock => {
+//   console.log("Latest Block Via HTTP Provider: ");
+//   console.log(latestBlock);
+//   // Stop the program once this has finished
+//   process.exit();
+// });
+
+// web3.eth.personal.newAccount("!@superpassword").then(console.log);
+
+web3.eth.personal
+  .unlockAccount(
+    "0x942fE5e8E506650c6Fa599b580F19e6CD3EbdeA1",
+    "!@superpassword",
+    600
+  )
+  .then(console.log("Account unlocked!"));
+
+web3.eth
+  .getBalance("0x942fE5e8E506650c6Fa599b580F19e6CD3EbdeA1")
+  .then(console.log);

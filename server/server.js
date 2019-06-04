@@ -5,7 +5,7 @@ const bodyParser = require("koa-bodyparser");
 const json = require("koa-json");
 const cors = require("@koa/cors");
 const ipfs = require("./ipfs");
-
+const nodeConnection = require("./nodeConnection");
 const app = new Koa();
 const router = new KoaRouter();
 
@@ -49,6 +49,25 @@ router.post("/add", async ctx => {
 });
 
 // ----------------------------------------
+
+// ----- GENERATE ADDRESS FOR ATTE
+router.post("/address", async ctx => {
+  const { password } = ctx.request.body;
+  const address = await nodeConnection.generateAddress(password);
+  ctx.body = {
+    address
+  };
+});
+
+router.post("/newAttendee", async ctx => {
+  const { password, content } = ctx.request.body;
+  const hash = await ipfs.send(content);
+  const address = await nodeConnection.generateAddress(password);
+  ctx.body = {
+    hash,
+    address
+  };
+});
 
 router.post("/contract/:contractAddress/mint", async ctx => {});
 
