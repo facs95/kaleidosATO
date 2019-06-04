@@ -13,6 +13,10 @@ let web3 = new Web3(provider);
 exports.generateAddress = generateAddress;
 
 async function generateAddress(password) {
-  const address = await web3.eth.personal.newAccount(password);
-  return address;
+  try {
+    const address = await web3.eth.personal.newAccount(password);
+    return address;
+  } catch (err) {
+    throw new Error(err);
+  }
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { newAttendee } from "../apiURL";
 
-const useRegistrationForm = callback => {
+const useRegistrationForm = props => {
   const [inputs, setInputs] = useState({});
   const handleSubmit = async event => {
     if (event) {
@@ -18,8 +18,7 @@ const useRegistrationForm = callback => {
     };
     try {
       const newAttendeeInfo = await axios.post(newAttendee, body);
-      console.log(newAttendeeInfo);
-      // props.history.push('/user/newAttendeeInfo/');
+      props.history.push(`/user/${newAttendeeInfo.data.hash}`);
     } catch (err) {
       console.log(err);
     }

@@ -63,6 +63,20 @@ router.post("/newAttendee", async ctx => {
   const { password, content } = ctx.request.body;
   const hash = await ipfs.send(content);
   const address = await nodeConnection.generateAddress(password);
+  // generate erc27 token with has as id
+  // transfer erc20 coins
+  ctx.body = {
+    hash,
+    address
+  };
+});
+
+router.post("/validateAttendee", async ctx => {
+  const { address } = ctx.request.body;
+  // get hash IPFS from ERC27 id
+  // burn erc27
+  // get erc20 balance
+  const attendeeInfo = ipfs.get(hash);
   ctx.body = {
     hash,
     address
