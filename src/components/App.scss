@@ -1,5 +1,13 @@
+@import "./variables";
+
 .App {
   text-align: center;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, $brand-purple 0%, $brand-blue 100%) fixed;
 }
 
 .App-logo {
@@ -21,6 +29,16 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.background-cut {
+  position: fixed;
+  background: white;
+  height: 58vh;
+  width: 100vw;
+  z-index: 4;
+  bottom: -300px;
+  transform: skewY(-10deg);
 }
 
 @keyframes App-logo-spin {

@@ -1,0 +1,59 @@
+@import "./variables";
+
+.request-form {
+  z-index: 11;
+  font-family: "Lato", sans-serif;
+
+  .request-form-header {
+    color: $dk-primary;
+  }
+
+  .request-fields {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: white;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    z-index: 4;
+  }
+
+  .request-input {
+    width: 300px;
+    height: 30px;
+    border-radius: $border-radius;
+    background: $dk-faded;
+  }
+
+  .request-btn {
+    width: 300px;
+    height: 50px;
+    border-radius: $border-radius;
+    background: $dk-primary;
+    color: white;
+    font-weight: 600;
+    font-size: medium;
+    &:hover {
+      background: $dk-primary-hover;
+      cursor: pointer;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .request-fields {
+      width: 300px;
+    }
+
+    .request-input {
+      width: 250px;
+    }
+
+    .request-btn {
+      width: 250px;
+    }
+  }
+}

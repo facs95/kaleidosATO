@@ -13,6 +13,7 @@ function App() {
       <Route exact path="/qr-reader" component={QRReader} />
       <Route exact path="/register" component={AttendeeRegister} />
       <Route exact path="/user/:wallet" component={Wallet} />
+      <div className="background-cut" />
     </div>
   );
 }

@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import QRCode from "qrcode.react";
-// import useRegistrationForm from "./CustomHooks";
-// import { addIpfsForm, getNewAddress } from "../apiURL";
-// import axios from "axios";
 
 const Wallet = props => {
   const [address, setAddress] = useState("");
