@@ -92,8 +92,8 @@ router.get("/validateAttendee/:address", async ctx => {
     const attendeePrimaryInfoObj = JSON.parse(attendeePrimaryInfoString);
     let credits = await contract.getBalanceCredits(address);
     data = {
-      hasTicket,
       attendeeInfo: {
+        hasTicket,
         firstName: attendeePrimaryInfoObj.name,
         lastName: attendeePrimaryInfoObj.lastName,
         email: attendeePrimaryInfoObj.email,

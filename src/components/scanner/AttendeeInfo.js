@@ -1,14 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function AttendeeInfo({ attendeeInfoResponse }) {
-  console.log(attendeeInfoResponse);
-  if (!attendeeInfoResponse) {
+export default function AttendeeInfo({ attendeeInfo }) {
+  if (!attendeeInfo) {
     return null;
   }
-  const { attendeeInfo, hasTicket } = attendeeInfoResponse;
+  const { firstName, lastName, credits, hasTicket } = attendeeInfo;
   if (hasTicket) {
-    const { firstName, lastName, credits } = attendeeInfo;
     return (
       <div>
         <h1>
@@ -26,10 +24,10 @@ export default function AttendeeInfo({ attendeeInfoResponse }) {
   }
 }
 
-// AttendeeInfo.propTypes = {
-//   attendeeInfoResponse: PropTypes.shape({
-//     firstName: PropTypes.string,
-//     lastName: PropTypes.string,
-//     credits: PropTypes.number
-//   }).isRequired
-// };
+AttendeeInfo.propTypes = {
+  attendeeInfo: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    credits: PropTypes.string
+  }).isRequired
+};

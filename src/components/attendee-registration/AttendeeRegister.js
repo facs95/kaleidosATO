@@ -1,20 +1,22 @@
-import React from 'react';
+import React, { useState } from "react";
 
-import useRegistrationForm from '../CustomHooks';
-import { withRouter } from 'react-router-dom';
-import './attendee-registration.scss';
+import useRegistrationForm from "../CustomHooks";
+import { withRouter } from "react-router-dom";
+import "./attendee-registration.scss";
 // import Loader from "./loader";
 
 const AttendeeRegistration = props => {
+  const [loader, setLoader] = useState(false);
   const { inputs, handleInputChange, handleSubmit } = useRegistrationForm(
-    props
+    props,
+    setLoader
   );
   return (
     <div className="registration-container">
       {/* <Loader /> */}
       <div className="registration-tile">
         <header className="registration-header">
-          <h3>Welcome to Kaleido's Conference!</h3>
+          <h3>Kaleido's conference ticket!</h3>
         </header>
         <form onSubmit={handleSubmit}>
           <input
@@ -51,10 +53,17 @@ const AttendeeRegistration = props => {
             onChange={handleInputChange}
             value={inputs.password}
             placeholder="Password"
+            required
           />
-          <button className="registration-btn" type="submit">
-            Purchase
-          </button>
+          {loader ? (
+            <button className="registration-btn-loading" type="submit">
+              Loading...
+            </button>
+          ) : (
+            <button className="registration-btn" type="submit">
+              Purchase
+            </button>
+          )}
         </form>
       </div>
     </div>

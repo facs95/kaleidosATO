@@ -9,6 +9,7 @@ import "./scanner.scss";
 function Scanner() {
   const [qrScanResult, setQrScanResult] = useState();
   const [attendeeInfo, setAttendeeInfo] = useState();
+  const [attendeeName, setAttendeeName] = useState();
 
   const canvasRef = useRef();
 
@@ -16,10 +17,9 @@ function Scanner() {
     async function validateAttendee(address) {
       const url = getValidateAttendee(address);
       console.log(url);
-      const response = await axios.get(url);
-      console.log(response.data);
-      console.log(attendeeInfo);
-      setAttendeeInfo(JSON.stringify(response.data));
+      const response = await fetch(url);
+      const { attendeeInfo } = await response.json();
+      setAttendeeInfo(attendeeInfo);
     }
     if (qrScanResult) {
       validateAttendee(qrScanResult);
