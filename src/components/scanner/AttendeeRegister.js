@@ -1,6 +1,6 @@
 import React from "react";
 
-import useRegistrationForm from "./CustomHooks";
+import useRegistrationForm from "../CustomHooks";
 import { withRouter } from "react-router-dom";
 import "./register-form.scss";
 // import Loader from "./loader";

@@ -5,6 +5,7 @@ const bodyParser = require("koa-bodyparser");
 const json = require("koa-json");
 const cors = require("@koa/cors");
 const ipfs = require("./ipfs");
+const contract = require("./contracts");
 const nodeConnection = require("./nodeConnection");
 const app = new Koa();
 const router = new KoaRouter();
@@ -63,47 +64,45 @@ router.post("/newAttendee", async ctx => {
   const { password, content } = ctx.request.body;
   const hash = await ipfs.send(content);
   const address = await nodeConnection.generateAddress(password);
-  // generate erc27 token with has as id
-  // transfer erc20 coins
+  const isMint = await contract.mintToken(address, hash);
+  const transferCredits = await contract.transferCredits(address, "5");
   ctx.body = {
     hash,
-    address
+    address,
+    mintStatus: isMint,
+    creditStatus: transferCredits
   };
 });
 
-router.post("/validateAttendee", async ctx => {
-  const { address } = ctx.request.body;
-  //check if he has ERC27 token
-  //NO return No ticket
-  // yes
-  // get hash IPFS from ERC27 id
-  // burn erc27
-  // get erc20 balance
-  const attendeeInfo = ipfs.get(hash);
-
-  const mock = {
-    attendeInfo: {
-      name: "Freddy",
-      lastName: "Caceres",
-      email: "facs95@gmail.com"
-    },
-    credits: 5
-  };
-  ctx.body = {
-    attendeInfo: {
-      name: "Freddy",
-      lastName: "Caceres",
-      email: "facs95@gmail.com"
-    },
-    credits: 5
-  };
+router.get("/validateAttendee/:address", async ctx => {
+  const { address } = ctx.params;
+  const balance = await contract.getBalanceTicket(address);
+  let data;
+  let hasTicket;
+  if (balance < 1) {
+    hasTicket = false;
+    data = {
+      hasTicket,
+      attendeeInfo: {}
+    };
+  } else {
+    hasTicket = true;
+    let URI = await contract.getURI(address);
+    let attendeePrimaryInfoString = await ipfs.get(URI);
+    const attendeePrimaryInfoObj = JSON.parse(attendeePrimaryInfoString);
+    let credits = await contract.getBalanceCredits(address);
+    data = {
+      hasTicket,
+      attendeeInfo: {
+        firstName: attendeePrimaryInfoObj.name,
+        lastName: attendeePrimaryInfoObj.lastName,
+        email: attendeePrimaryInfoObj.email,
+        credits
+      }
+    };
+  }
+  ctx.body = data;
 });
-
-router.post("/contract/:contractAddress/mint", async ctx => {});
-
-router.post("/contract/:contractAddress/burn", async ctx => {});
-
-router.post("/contract/:contractAddress/transfer", async ctx => {});
 
 app.use(router.routes()).use(router.allowedMethods());
 

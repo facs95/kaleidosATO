@@ -1,0 +1,61 @@
+@import '../variables';
+
+.registration-container {
+  z-index: 10;
+
+  .registration-header {
+    margin-bottom: 30px;
+  }
+
+  .registration-tile {
+    width: 350px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    z-index: 4;
+
+    .registration-input {
+      box-sizing: border-box;
+      padding: 10px 18px;
+      min-width: 300px;
+      border: 1px solid #dee2e6;
+      box-shadow: none;
+      border-radius: $border-radius;
+      background-color: transparent;
+      margin: 10px 0px 20px;
+      cursor: text;
+      color: #66615b;
+      transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out,
+        background-color 0.3s ease-in-out;
+
+      &:focus {
+        border-color: $dk-primary;
+        background: transparent;
+        outline: 0 !important;
+        box-shadow: 0 3px 9px rgba(50, 50, 9, 0),
+          3px 4px 8px rgba(94, 114, 228, 0.1);
+      }
+    }
+
+    .registration-btn {
+      width: 300px;
+      height: 50px;
+      border-radius: $border-radius;
+      border: 0;
+      background: $dk-primary;
+      color: white;
+      font-weight: 600;
+      font-size: medium;
+      &:hover {
+        background: $dk-primary-hover;
+        cursor: pointer;
+      }
+    }
+  }
+}
