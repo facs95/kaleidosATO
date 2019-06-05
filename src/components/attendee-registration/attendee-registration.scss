@@ -44,13 +44,12 @@
       }
     }
 
-    .registration-btn {
+    %btn {
       margin-top: 18px;
       width: 300px;
       height: 50px;
       border-radius: $border-radius;
       border: 0;
-      background: $dk-primary;
       color: white;
       font-weight: 600;
       font-size: medium;
@@ -59,21 +58,13 @@
         cursor: pointer;
       }
     }
-
+    .registration-btn {
+      @extend %btn;
+      background: $dk-primary;
+    }
     .registration-btn-loading {
-      margin-top: 18px;
-      width: 300px;
-      height: 50px;
-      border-radius: $border-radius;
-      border: 0;
+      @extend %btn;
       background: grey;
-      color: white;
-      font-weight: 600;
-      font-size: medium;
-      &:hover {
-        background: $dk-primary-hover;
-        cursor: pointer;
-      }
     }
   }
 }

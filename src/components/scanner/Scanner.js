@@ -3,13 +3,11 @@ import jsQR from "jsqr";
 import { getValidateAttendee } from "../../apiURL";
 import Welcome from "./Welcome";
 import AttendeeInfo from "./AttendeeInfo";
-import axios from "axios";
 import "./scanner.scss";
 
 function Scanner() {
   const [qrScanResult, setQrScanResult] = useState();
   const [attendeeInfo, setAttendeeInfo] = useState();
-  const [attendeeName, setAttendeeName] = useState();
 
   const canvasRef = useRef();
 
