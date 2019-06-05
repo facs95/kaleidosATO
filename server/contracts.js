@@ -12,10 +12,13 @@ const ATOTContract = require("./contracts/ERC721Kaleido.json");
 const axios = require("axios");
 const base64 = require("base-64");
 
-let nodeUrl = "https://" + USER + ":" + PASS + "@" + RPC_ENDPOINT;
-let provider = new Web3.providers.HttpProvider(nodeUrl);
-let web3 = new Web3(provider);
-contractAccess = new web3.eth.Contract(ATOTContract.abi, CONTRACT_ATOT_ADDRESS);
+const nodeUrl = "https://" + USER + ":" + PASS + "@" + RPC_ENDPOINT;
+const provider = new Web3.providers.HttpProvider(nodeUrl);
+const web3 = new Web3(provider);
+const contractAccess = new web3.eth.Contract(
+  ATOTContract.abi,
+  CONTRACT_ATOT_ADDRESS
+);
 
 exports.mintToken = mintToken;
 exports.transferCredits = transferCredits;
@@ -31,7 +34,6 @@ async function mintToken(address, URI) {
     tokenURI: URI
   };
   const token = base64.encode(`${USER}:${PASS}`);
-  console.log(token);
   try {
     const response = await axios.post(
       `${TOKEN_FACTORY_URL}/${CONTRACT_ATOT_ADDRESS}/mint`,
@@ -65,7 +67,6 @@ async function transferCredits(address, amount) {
         }
       }
     );
-    console.log(response);
     return response.status;
   } catch (err) {
     throw new Error(err);

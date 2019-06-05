@@ -82,15 +82,16 @@ router.get("/validateAttendee/:address", async ctx => {
   if (balance < 1) {
     hasTicket = false;
     data = {
-      hasTicket,
-      attendeeInfo: {}
+      attendeeInfo: {
+        hasTicket
+      }
     };
   } else {
     hasTicket = true;
-    let URI = await contract.getURI(address);
-    let attendeePrimaryInfoString = await ipfs.get(URI);
+    const URI = await contract.getURI(address);
+    const attendeePrimaryInfoString = await ipfs.get(URI);
     const attendeePrimaryInfoObj = JSON.parse(attendeePrimaryInfoString);
-    let credits = await contract.getBalanceCredits(address);
+    const credits = await contract.getBalanceCredits(address);
     data = {
       attendeeInfo: {
         hasTicket,
